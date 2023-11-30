@@ -22,8 +22,8 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),  # Assuming your home view is in the main app
-    path('authentication/', include('authentication.urls')),  # Include the URLs from the authentication app
+    #path('', views.home, name='home'),  # Assuming your home view is in the main app
+    path('', include('authentication.urls')),  # Include the URLs from the authentication app
     path('contact-page/', views.contactus, name='contactus'),  # Assuming your contactus view is in the main app
 ]
 
