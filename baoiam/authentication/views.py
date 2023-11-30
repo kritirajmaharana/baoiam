@@ -2,11 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import auth
-#from .models import User as CustomUser
 from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
-# def home(request):
-#     return render(request, "home/index.html")
 def home(request):
     return render(request,"home/index.html")
 
@@ -19,6 +17,7 @@ def signup(request):
             except User.DoesNotExist:
                 user=User.objects.create_user(username=request.POST['username'],password=request.POST['password'])
                 auth.login(request,user)
+                messages.success(request, "You have successfully signed up!") 
                 return redirect(login)
         else:
             return render(request,'authentication/register.html',{'error':"password dont match"})
@@ -33,7 +32,7 @@ def login(request):
         user=auth.authenticate(username=uname,password=pwd)
         if user is not None:
             auth.login(request,user)
-            return redirect('')
+            return render(request,'home/index.html')
         else:
             return render(request,'authentication/login.html',{'error':'invalid data'})
     else:
@@ -43,3 +42,6 @@ def login(request):
 def signout(request):
     # Add sign-out logic if needed
     pass
+
+def contactus(request):
+    return render(request, 'contact-page/index.html')
