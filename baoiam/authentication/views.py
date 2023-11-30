@@ -43,6 +43,3 @@ def login(request):
 def signout(request):
     # Add sign-out logic if needed
     pass
-
-def contactus(request):
-    return render(request, 'contact-page/index.html')

@@ -18,17 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from baoiam import views
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path("", views.home,name="home"),
-     path('',include('authentication.urls')),
-    # path('contact-page/',views.contactus, name='contactus'),
-    # path('signup/',views.signup, name="signup"),
-    # path('login/', views.login, name='login'),
+    path('', views.home, name='home'),  # Assuming your home view is in the main app
+    path('authentication/', include('authentication.urls')),  # Include the URLs from the authentication app
+    path('contact-page/', views.contactus, name='contactus'),  # Assuming your contactus view is in the main app
 ]
 
 # Serve static files during development
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
