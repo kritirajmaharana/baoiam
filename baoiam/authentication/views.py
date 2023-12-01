@@ -1,29 +1,39 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponseRedirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_protect
 
 def home(request):
     return render(request,"home/index.html")
 
+
 def signup(request):
-    if request.method=="POST":
-        if request.POST['password']==request.POST['passwordagain']:
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        password_again = request.POST.get('passwordagain')
+        email = request.POST.get('email')
+
+        if password == password_again:
             try:
-                user=User.objects.get(username=request.POST['username'])
-                return render(request,'authentication/register.html',{'error':"name already exit"})
+                user = User.objects.get(username=username)
+                return render(request, 'authentication/register.html', {'error': "Username already exists"})
             except User.DoesNotExist:
-                user=User.objects.create_user(username=request.POST['username'],password=request.POST['password'])
-                auth.login(request,user)
-                messages.success(request, "You have successfully signed up!") 
-                return redirect(login)
+                user = User.objects.create_user(username=username, email=email, password=password)
+                auth.login(request, user)
+                messages.success(request, "You have successfully signed up!")
+                
+                return render(request,'authentication/login.html')
+              
         else:
-            return render(request,'authentication/register.html',{'error':"password dont match"})
+            return render(request, 'authentication/register.html', {'error': "Passwords don't match"})
     else:
-        
-        return render(request,'authentication/register.html')
+        return render(request, 'authentication/register.html')
+
+
 
 def login(request):
     if request.method=='POST':

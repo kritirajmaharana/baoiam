@@ -9,8 +9,9 @@
 </head>
 <body>
     <h1>Create New account!!!</h1>
+    
     <form action="{% url 'signup' %}" method="POST">
-        {% csrf_token %}
+      {% csrf_token %}
         <h4>{{error}}</h4>
         <div class="mb-3">
           <label >Username</label>
@@ -24,6 +25,11 @@
             <label>confirm password</label>
             <input type="password" name="passwordagain" class="form-control" placeholder="Password">
         </div>
+
+        <div class="mb-3">
+          <label>email password</label>
+          <input type="email" name="email" class="form-control" placeholder="email">
+      </div>
 
         <div class="mb-3 form-check">
           <input type="checkbox" class="form-check-input" >
