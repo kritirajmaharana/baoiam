@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-!3l*p7o@&$(t-+++uvgtws^!cjs+i#4(eq8nphxkk6id_gy7tg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -38,8 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    
+    "allauth", # new
+    "allauth.account", # new
+    "allauth.socialaccount", # new
+    'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.github',
+    # 'allauth.socialaccount.providers.facebook',
     'authentication',
     'homepage',
+    #'crispy_forms',
+    #'crispy_forms_filters',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'baoiam.urls'
@@ -65,6 +76,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+              
             ],
         },
     },
@@ -134,3 +146,42 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+SITE_ID = 1
+#client id
+#904583984537-u2ln2oncqdp6sa1v13scp31903mkrrsh.apps.googleusercontent.com
+#client secret
+#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
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+            'prompt': 'select_account', 
+        },
+        'OAUTH_PKCE_ENABLED': True,
+    }
+}
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'github': {
+#         'APP': [
+#             'client_id':'f59fece337be617d5032',
+#             'secret':'',
+#             'key',
+#         ],
+#     }
+# }
+
+LOGIN_REDIRECT_URL='/'
+LOGOUT_REDIRECT_URL='/'
