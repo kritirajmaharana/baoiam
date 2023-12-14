@@ -12,6 +12,7 @@
 </head>
 
 <body>
+  {% load socialaccount %}
 
   <div class="main">
     <div class="cir"></div>
@@ -50,7 +51,7 @@
           </a></div>
           <div class="circle"><a href="#"><i class="fab fa-twitter"></i>
           </a></div>
-          <div class="circle"><a href="#"> <i class="fab fa-google"></i></a></div>
+          <div class="circle"><a href="{% provider_login_url 'google' %}"> <i class="fab fa-google"></i></a></div>
           <div class="circle"><a href="#"><i class="fab fa-linkedin-in"></i></a></div>
         </div>
       </div>
