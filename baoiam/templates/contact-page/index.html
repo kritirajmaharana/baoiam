@@ -242,81 +242,92 @@
             </div>
           </div>
         </div>
-      <form method="post" action="https://script.google.com/macros/s/AKfycbyFrYBrD6X27DW9gKwXcJXyz2L-e52v_W7Tl_du5dDAnuvzM_hxF3COi2IiCOzbVzEnBg/exec" >
-        <div class="main-contact-wrapper">
-          <div class="contact-right">
-            <h2>Submit Your <span>Details</span></h2>
+        <form method="post" action="#">
+          {% csrf_token %}
+          <div class="main-contact-wrapper">
+            <div class="contact-right">
+              <h2>Submit Your <span>Details</span></h2>
+              <!-- Other HTML content in index.html -->
+              {% if thank_you_message %}
+              <div class="thank-you-message">
+                <p>{{ thank_you_message }}</p>
+              </div>
+              {% endif %}
 
-            <div class="main-comment">
-              <div class="input-icons">
-                <div class="subcomment">
+              <div class="main-comment">
+                <div class="input-icons">
+                  <div class="subcomment">
+                    <span>
+                      <input
+                        class="input-field"
+                        type="text"
+                        name="name"
+                        placeholder="Your Name"
+                      />
+                      <i class="fa fa-user icon" aria-hidden="true"></i>
+                    </span>
+                    <span>
+                      <input
+                        class="input-field"
+                        type="email"
+                        name="email"
+                        placeholder="Your Email"
+                      />
+                      <i class="fa fa-envelope icon" aria-hidden="true"></i>
+                    </span>
+                  </div>
+
+                  <div class="subcomment">
+                    <span>
+                      <input
+                        class="input-field"
+                        type="number"
+                        name="number"
+                        placeholder="Phone No."
+                      />
+                      <i class="fa fa-phone icon" aria-hidden="true"></i>
+                    </span>
+                    <span>
+                      <!-- <label for="course" class="label"> courses</label> -->
+                      <select id="cars" name="course">
+                        <option value="Courses">Select Course</option>
+                        <option value="Product Development">
+                          Product Management
+                        </option>
+                        <option value=" Enterpreneurship">
+                          Entrepreneurship
+                        </option>
+                        <option value="Internship">Internship</option>
+                        <option value="Internship">SAP FICO</option></select
+                      ><i
+                        class="fa fa-sharp fa-regular fa-bookmark icon"
+                        aria-hidden="true"
+                      ></i>
+                    </span>
+                  </div>
+
                   <span>
-                    <input
+                    <textarea
+                      name="msg"
                       class="input-field"
-                      type="text" name="name"
-                      placeholder="Your Name"
-                    />
-                    <i class="fa fa-user icon" aria-hidden="true"></i>
-                  </span>
-                  <span>
-                    <input
-                      class="input-field"
-                      type="email" name="email"
-                      placeholder="Your Email"
-                    />
-                    <i class="fa fa-envelope icon" aria-hidden="true"></i>
-                  </span>
-                </div>
+                      type="text"
+                      rows="7"
+                      cols="100"
+                    ></textarea>
 
-                <div class="subcomment">
-                  <span>
-                    <input
-                      class="input-field"
-                      type="number"
-                      name="number"
-                      placeholder="Phone No."
-                    />
-                    <i class="fa fa-phone icon" aria-hidden="true"></i>
+                    <i class="fa fa-comment icon"></i>
                   </span>
-                  <span>
-                    <!-- <label for="course" class="label"> courses</label> -->
-                    <select id="cars" name="course">
-                      <option value="Courses">Select Course</option>
-                      <option value="Product Development">
-                        Product Management
-                      </option>
-                      <option value=" Enterpreneurship">
-                        Entrepreneurship
-                      </option>
-                      <option value="Internship">Internship</option>
-                      <option value="Internship">SAP FICO</option></select
-                    ><i
-                      class="fa fa-sharp fa-regular fa-bookmark icon"
-                      aria-hidden="true"
-                    ></i>
-                  </span>
-                </div>
 
-                <span>
-                  <textarea
-                    name="msg"
-                    class="input-field"
-                    type="text"
-                    rows="7"
-                    cols="100"
-                  ></textarea>
-
-                  <i class="fa fa-comment icon"></i>
-                </span>
-
-                <div class="submit-btn">
-                  <button class="contact-btn" type="submit" id="submit">Submit</button>
+                  <div class="submit-btn">
+                    <button class="contact-btn" type="submit" id="submit">
+                      Submit
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
       </div>
     </section>
 

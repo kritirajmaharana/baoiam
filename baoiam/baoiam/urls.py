@@ -12,10 +12,13 @@ urlpatterns = [
     path('accounts/',include('allauth.urls')),
     
     path('',include('authentication.urls')),
+    path('homepage/',include('homepage.urls')),
    
     
 
-    path('home/', TemplateView.as_view(template_name='home/index.html'), name='home')
+    # path('home/', TemplateView.as_view(template_name='home/index.html'), name='home')
+    
+    path('login/', TemplateView.as_view(template_name='authentication/login.html'), name='login')
   
    
 

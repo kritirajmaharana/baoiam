@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     "allauth.account", # new
     "allauth.socialaccount", # new
     'allauth.socialaccount.providers.google',
+    'social_django',
+    #'allauth.socialaccount.models.socialApp',
+    
+    
     # 'allauth.socialaccount.providers.github',
     # 'allauth.socialaccount.providers.facebook',
     'authentication',
@@ -76,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',      #add this
               
             ],
         },

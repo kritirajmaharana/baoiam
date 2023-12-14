@@ -1,6 +1,17 @@
 from django.shortcuts import render
+from .models import contact
 
-# def home(request):
-#     return render(request, 'home/index.html')
+def contactus(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('number') 
+        message = request.POST.get('msg')
 
-# Create your views here.
+        contact_obj = contact(name=name, email=email, phone=phone, content=message)
+        contact_obj.save()
+
+        return render(request, 'contact-page/index.html', {'thank_you_message': 'Thank you for contacting us!'})
+
+    return render(request, 'contact-page/index.html') 
+

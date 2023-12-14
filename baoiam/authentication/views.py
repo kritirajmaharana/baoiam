@@ -26,11 +26,12 @@ def signup(request):
                 authenticated_user = authenticate(username=username, password=password)
                 if authenticated_user:
                     auth_login(request, authenticated_user)
-                    messages.success(request, "You have successfully signed up!")
-                    return render(request, 'home/index.html')
+                    # messages.success(request, "You have successfully signed up!")
+                    return render(request, 'authentication/login.html')
+                
                 else:
                     # Handle the case where authentication fails after register
-                    return render(request, 'authentication/login.html', {'error': 'Sign up failed. Please try logging in.'})
+                    return render(request, 'authentication/register.html', {'error': 'Sign up failed. Please try logging in.'})
         else:
             return render(request, 'authentication/register.html', {'error': "Passwords don't match"})
     else:
@@ -46,7 +47,7 @@ def login(request):
         user=auth.authenticate(username=uname,password=pwd)
         if user is not None:
             auth.login(request,user)
-            # return render(request,'authentication/dashboard')
+            
             return redirect('/')
         else:
             return render(request,'authentication/login.html',{'error':'invalid data'})
@@ -59,6 +60,7 @@ def signout(request):
     return redirect('/')
     
 
-def contactus(request):
-    return render(request, 'contact-page/index.html')
+# def contactus(request):
+#     return render(request, 'contact-page/index.html')
 
+# "{% provider_login_url 'google' %}"
