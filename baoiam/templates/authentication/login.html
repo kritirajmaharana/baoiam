@@ -19,9 +19,10 @@
     <div class="box1">
       <div class="container">
       <div class="Bimg">
-        <img src="/images/brand.png" alt="" style="width: 200px;">
+        <img src="{% static 'authentication/img/brand.png' %}" alt="" style="width: 200px;">
       </div>
       <h1>Sign In</h1>
+      <p>{{error}}</p>
       <form action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         <div class="username">
